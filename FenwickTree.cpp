@@ -25,8 +25,15 @@ void update(int x, int valor){
 // Ejemplo de uso
 
 int main(){
-  std::ios::sync_with_stdio(false);
 
+  ft.resize(11,0);
+
+  for(int i = 1; i <= 10; i++)
+    update(i, i * i);
+
+  cout << suma(2) << endl; // 1 * 1 + 2 * 2 = 5
+  cout << suma(5) << endl; // 1 * 1 + 2 * 2 + 3 * 3 + 4 * 4 + 5 * 5 = 55
+  cout << suma(5) - suma(2) << endl; // RSQ(3,5) = 50
 
 
   return 0;
