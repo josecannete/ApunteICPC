@@ -16,7 +16,7 @@ int suma(int x, int y){
 	return sum;
 }
 
-// Sumar "valor" al elemento en el indice "x"
+// Sumar "valor" al elemento en el indice (x,y)
 // O(log n * log m)
 void update(int x, int y, int valor){
 	for (int i = x; i < ft.size(); i += (i & -i) )
