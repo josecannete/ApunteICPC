@@ -9,28 +9,29 @@ vector<int> d;
 vector<vector<ii> > adj; // Lista de adyacencia con pesos
 int n; // Cantidad de nodos
 
-void dijsktra(int nodo){
+void dijkstra(int nodo){
   d.assign(n+1,inf);
   priority_queue<ii> cola;
 
-  cola.push(ii(nodo, 0));
+  cola.push(ii(0, nodo));
   d[nodo] = 0;
 
   while(!cola.empty()){
-    ii u = cola.top();
-    int nodoActual = u.first;
+    ii u = cola.top(); cola.pop();
+    int nodoActual = u.second;
     for (int i = 0; i < adj[nodoActual].size(); i++){
       ii parVecino = adj[nodoActual][i];
-      int nodoVecino = parVecino.first;
-      int pesoVecino = parVecino.second;
-      if (d[nodoActual] + pesoVecino < d[nodoVecino])
+      int nodoVecino = parVecino.second;
+      int pesoVecino = parVecino.first;
+      if (d[nodoActual] + pesoVecino < d[nodoVecino]){
         d[nodoVecino] = d[nodoActual] + pesoVecino;
-        cola.push(ii(nodoVecino,d[nodoVecino]));
+        cola.push(ii(d[nodoVecino],nodoVecino));
+      }
     }
   }
 }
 
-
+// Ver el problema 10986 - Sending email de UVa
 int main(){
   return 0;
 }
