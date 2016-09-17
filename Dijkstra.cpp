@@ -6,26 +6,32 @@ typedef pair<int, int> ii;
 // Vector que contiene las distancias desde el nodo
 // en que partimos el BFS hasta el resto de los nodos
 vector<int> d;
+vector<int> visited;
 vector<vector<ii> > adj; // Lista de adyacencia con pesos
 int n; // Cantidad de nodos
 
 void dijkstra(int nodo){
+  // Seteamos d, visited y creamos la cola de prioridad
   d.assign(n+1,inf);
-  priority_queue<ii> cola;
+  visited.assign(n+1,0);
+  priority_queue<ii, vector<ii>, greater<ii> > cola;
 
   cola.push(ii(0, nodo));
   d[nodo] = 0;
 
   while(!cola.empty()){
     ii u = cola.top(); cola.pop();
-    int nodoActual = u.second;
-    for (int i = 0; i < adj[nodoActual].size(); i++){
-      ii parVecino = adj[nodoActual][i];
-      int nodoVecino = parVecino.second;
-      int pesoVecino = parVecino.first;
-      if (d[nodoActual] + pesoVecino < d[nodoVecino]){
-        d[nodoVecino] = d[nodoActual] + pesoVecino;
-        cola.push(ii(d[nodoVecino],nodoVecino));
+    int Actual = u.second;
+    visited[Actual] = 1;
+    for (int i = 0; i < adj[Actual].size(); i++){
+      ii Vecino = adj[Actual][i];
+      int nodoVecino = Vecino.second;
+      int pesoVecino = Vecino.first;
+      if (!visited[nodoVecino]){
+        if (d[Actual] + pesoVecino < d[nodoVecino]){
+          d[nodoVecino] = d[Actual] + pesoVecino;
+          cola.push(ii(d[nodoVecino],nodoVecino));
+        }
       }
     }
   }
