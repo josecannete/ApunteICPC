@@ -25,8 +25,8 @@ void dijkstra(int nodo){
     visited[Actual] = 1;
     for (int i = 0; i < adj[Actual].size(); i++){
       ii Vecino = adj[Actual][i];
-      int nodoVecino = Vecino.second;
-      int pesoVecino = Vecino.first;
+      int nodoVecino = Vecino.first;
+      int pesoVecino = Vecino.second;
       if (!visited[nodoVecino]){
         if (d[Actual] + pesoVecino < d[nodoVecino]){
           d[nodoVecino] = d[Actual] + pesoVecino;
@@ -39,5 +39,9 @@ void dijkstra(int nodo){
 
 // Ver el problema 10986 - Sending email de UVa
 int main(){
+
+  // RECIBIMOS LOS DATOS CON UNA LISTA DE ADJ ASI:
+  // 1 -> (nodo, peso), (nodo, peso)...
+
   return 0;
 }
