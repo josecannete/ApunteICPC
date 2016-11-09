@@ -3,21 +3,16 @@ using namespace std;
 
 int B = 33;
 
-long long fast_pow(int a,int n)
-{
-    long long result = 1;
-    long long power = n;
-    long long value = a;
-    while(power>0)
-    {
-        if(power&1)
-            result = result*value;
-
-        value = value*value;
-        power /= 2;
-        //power >>= 1;
-    }
-    return result;
+long long fast_pow(int a,int n){
+  long long result = 1, power = n, value = a;
+  while(power>0){
+    if(power&1)
+      result = result*value;
+    value = value*value;
+    power /= 2;
+    //power >>= 1;
+  }
+  return result;
 }
 
 void hashear(vector<long long>& h, string s){
