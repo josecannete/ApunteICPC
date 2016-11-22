@@ -8,7 +8,7 @@ vector<vector<int> > ft;
 // Podemos obtener el RSQ entre (x1,y1) y (x2,y2)
 // con suma(x2, y2) - suma(x2, y1 - 1) - suma(x1 - 1, y2) + suma(x1 - 1, y1 - 1)
 // O(log n * log m)
-int suma(int x, int y){
+int suma(int x, int y) {
 	int sum = 0;
 	for (int i = x ; i ; i -= (i & -i) )
     for (int j = y ; j ; j -= (j & -j) )
@@ -18,7 +18,7 @@ int suma(int x, int y){
 
 // Sumar "valor" al elemento en el indice (x,y)
 // O(log n * log m)
-void update(int x, int y, int valor){
+void update(int x, int y, int valor) {
 	for (int i = x; i < ft.size(); i += (i & -i) )
     for (int j = y; j < ft.size(); j += (j & -j) )
 			ft[i][j] += valor;

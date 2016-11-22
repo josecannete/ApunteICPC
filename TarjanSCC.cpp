@@ -11,11 +11,11 @@ int n;
 int numSCC;
 
 // dfs(nodo, level, padre)
-void dfs_aux(int u, int l, int p){
+void dfs_aux(int u, int l, int p) {
   level[u] = low[u] = l;
   parent[u] = p;
   S.push_back(u);
-  for (int i = 0; i < adj[u].size(); i++){
+  for (int i = 0; i < adj[u].size(); i++) {
     int v = adj[u][i];
     // Ignorar al padre
     if (v == parent[u]) continue;
@@ -23,11 +23,11 @@ void dfs_aux(int u, int l, int p){
       dfs_aux(v, l+1, u);
     if (level[v] != -1)
       low[u] = min(low[u], low[v]);
-    }
-  if (low[u] == level[u]){
+  }
+  if (low[u] == level[u]) {
     SCC.push_back(vector<int>(0));
     cout << "SCC " << numSCC << endl;
-    while(1){
+    while(1) {
       int v = S.back(); S.pop_back(); level[v] = -1;
       SCC[numSCC].push_back(v);
       cout << v << " ";
@@ -38,13 +38,11 @@ void dfs_aux(int u, int l, int p){
   }
 }
 
-void tarjanSCC(){
+void tarjanSCC() {
   // aca los nodos van desde 1 hasta n
-  for (int i = 1; i <= n; i++){
-    if (level[i] == -1){
+  for (int i = 1; i <= n; i++)
+    if (level[i] == -1)
       dfs_aux(i, 0, -1);
-    }
-  }
 }
 
 

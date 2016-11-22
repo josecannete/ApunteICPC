@@ -1,39 +1,66 @@
 #include <bits/stdc++.h>
 using namespace std;
-// indexado desde 0, se guardan valores en t[n+i] o bien usando modify(i, val)
-const int N = 2e5 + 5;  // Tamaño limite del arreglo
-int n;  // Tamano arreglo
-int neutro = 0; // Definimos el neutro para la operacion que vamos a hacer
-vector<int> t(2 * N, neutro);
 
-int combine(int a, int b){
-  return (a + b); // min(a,b), max(a,b), (a+b), (a*b), etc
-}
+template<class node> class ST {
+    vector<node> t;
+    int n;
 
-void build() {  // Construccion heap-like
-  for (int i = n - 1; i > 0; --i) t[i] = combine(t[2 * i], t[2 * i + 1]);
-}
 
-// Nota: Si p es un hijo 2*i, p^1 es 2*i + 1 y viceversa (XOR)
-void modify(int p, int valor) {  // Setear valor en la posicion p
-  for (t[p += n] = valor; p > 1; p /= 2) t[p / 2] = combine(t[p], t[p^1]);
-}
+public:
+    ST(vector<node> &arr) {
+        n = arr.size();
+        t.resize(n*2);
+        copy(arr.begin(), arr.end(), t.begin() + n);
+        for (int i = n-1; i > 0; --i)
+            t[i] = node(t[i<<1], t[i<<1|1]);
+    }
 
-int query(int l, int r) {  // Suma del intervalo [l,r)
-  int resl = neutro, resr = neutro;
-  for (l += n, r += n; l < r; l /= 2, r /= 2) {
-    if (l&1) resl = combine(resl, t[l++]);
-    if (r&1) resr = combine(t[--r], resr);
-  }
-  return combine(resl, resr);
-}
 
-// Ver problema Potetiometers de UVA
+    // 0-indexed
+    void set_point(int p, const node &value) {
+        for (t[p += n] = value; p > 1; p >>= 1)
+            t[p>>1] = node(t[p], t[p^1]);
+    }
+
+
+    // inclusive exclusive, 0-indexed
+    node query(int l, int r) {
+        node ansl, ansr;
+        for (l += n, r += n; l < r; l >>= 1, r >>= 1) {
+            if (l&1) ansl = node(ansl, t[l++]);
+            if (r&1) ansr = node(t[--r], ansr);
+        }
+        return node(ansl, ansr);
+    }
+};
+
+
+// Ejemplo de nodo: Range Minimum Query
+struct rminq {
+    int value;
+    rminq() {value = INT_MAX;}
+    rminq(int x) {value = x;}
+    rminq(const rminq &a, const rminq &b) {
+        value = min(a.value, b.value);
+    }
+};
+
+/* USO:
+Se requiere un struct para el nodo (ej: prodsgn).
+Un nodo debe tener tres constructores:
+    Aridad 0: Construye el neutro de la operación
+    Aridad 1: Construye un nodo hoja a partir del input
+    Aridad 2: Construye un nodo según sus dos hijos
+
+Construcción del segment tree:
+    Hacer un arreglo de nodos (usar ctor de aridad 1).
+    ST<miStructNodo> miSegmentTree(arregloDeNodos);
+Update:
+    miSegmentTree.set_point(indice, miStructNodo(input));
+Query:
+    miSegmentTree.query(l, r) es inclusivo exclusivo y da un nodo. Usar la info del nodo para obtener la respuesta.
+*/
+
 int main() {
-  cin >> n;
-  for (int i = 0; i < n; ++i) cin >> t[n+i];
-  build();
-  modify(0, 1);
-  cout << query(3,11) << endl;
-  return 0;
+  
 }

@@ -8,11 +8,11 @@ vector<vector<int> > adj; // Lista de adyacencia
 int n; // Cantidad de nodos
 int tiempo = 0;
 
-void dfs(int nodo){
+void dfs(int nodo) {
   st[nodo] = tiempo++;
-  for (int i = 0; i < adj[nodo].size(); i++){
+  for (int i = 0; i < adj[nodo].size(); i++) {
     int vecino = adj[nodo][i];
-    if ( st[vecino] == 0 )
+    if (st[vecino] == 0)
       dfs(vecino);
   }
   ft[nodo] = tiempo;

@@ -8,19 +8,17 @@ vector<int> d;
 vector<vector<int> > adj; // Lista de adyacencia
 int n; // Cantidad de nodos
 
-void bfs(int nodo){
+void bfs(int nodo) {
   // Seteamos las distancias como infinito
-  for(int i = 0; i < n; i++)
-    d[i] = inf;
+  d.assign(n+1, inf);
   d[nodo] = 0;
   queue<int> cola;
   cola.push(nodo);
-  while( !cola.empty() ){
+  while(!cola.empty()) {
     int u = cola.front(); cola.pop();
-    for (int i = 0; i < adj[u].size(); i++){
+    for (int i = 0; i < adj[u].size(); i++) {
       int vecino = adj[u][i];
-      if ( d[vecino] == inf )
-        d[vecino] = d[u] + 1, cola.push(vecino);
+      if (d[vecino] == inf) d[vecino] = d[u] + 1, cola.push(vecino);
     }
   }
 }

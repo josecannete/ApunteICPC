@@ -4,11 +4,11 @@ using namespace std;
 vector<vector<int>> subsets(vector<int>& nums) {
     int subsets = 1 << nums.size();
     vector<vector<int> > ret;
-    for (int i = 0; i < subsets; i++){
+    for (int i = 0; i < subsets; i++) {
         int aux = i;
         int add = 0;
         vector<int> sub;
-        while (aux != 0 && add < nums.size()){
+        while (aux != 0 && add < nums.size()) {
             if (aux & 1)
                 sub.push_back(nums[add]);
             aux >>= 1;

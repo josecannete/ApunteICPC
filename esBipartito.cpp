@@ -11,14 +11,14 @@ vector<vector<int> > adj; // Lista de adyacencia
 int n; // Cantidad de nodos
 
 // Revisamos si una componente conexa es bipartita
-bool esBipartitoConexo(int nodo){
+bool esBipartitoConexo(int nodo) {
   queue<int> cola;
   cola.push(nodo);
-  while( !cola.empty() ){
+  while(!cola.empty()) {
     int u = cola.front(); cola.pop();
-    for (int i = 0; i < adj[u].size(); i++){
+    for (int i = 0; i < adj[u].size(); i++) {
       int vecino = adj[u][i];
-      if ( color[vecino] == 0 ){
+      if (color[vecino] == 0) {
         cola.push(vecino);
         color[vecino] = -1 * color[u];
       }
@@ -33,10 +33,10 @@ bool esBipartitoConexo(int nodo){
 }
 
 // Función para ver si el grafo entero es bipartito
-bool esBipartito(){
+bool esBipartito() {
   bool bipartito = true;
-  for (int i = 1; i <= n; i++){
-    if (color[i] == 0){
+  for (int i = 1; i <= n; i++) {
+    if (color[i] == 0) {
       color[i] = 1;
       bipartito = bipartito & esBipartitoConexo(i);
     }

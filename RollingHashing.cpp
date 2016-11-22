@@ -1,35 +1,33 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+typedef unsigned long long ull;
+
 int B = 33;
 
-long long fast_pow(int a,int n){
-  long long result = 1, power = n, value = a;
-  while(power>0){
-    if(power&1)
-      result = result*value;
-    value = value*value;
-    power /= 2;
-    //power >>= 1;
+ull fast_pow(int a,int n) {
+  ull result = 1, power = n, value = a;
+  while (power>0) {
+    if (power&1) result = result * value;
+    value = value * value;
+    power >>= 1;
   }
   return result;
 }
 
-void hashear(vector<long long>& h, string s){
+void hashear(vector<ull>& h, string s) {
   h.assign(s.size()+1,0);
-
-  for (int i = s.size() - 1; i >= 0; i--){
-    h[i] = (long long)s[i] + h[i+1] * B;
-  }
+  for (int i = s.size() - 1; i >= 0; i--)
+    h[i] = (ull)s[i] + h[i+1] * B;
 }
 
-long long hashval(vector<long long>& h, int i, int j){
+ull hashval(vector<ull>& h, int i, int j) {
   return h[i] - h[j+1] * fast_pow(B, j+1-i);
 }
 
 int main(){
   string s = "abaaababaaab";
-  vector<long long> h;
+  vector<ull> h;
   hashear(h, s);
   cout << (int)'a' << endl;
   cout << fast_pow(B, 6) << endl;

@@ -10,7 +10,7 @@ vector<int> visited;
 vector<vector<ii> > adj; // Lista de adyacencia con pesos
 int n; // Cantidad de nodos
 
-void dijkstra(int nodo){
+void dijkstra(int nodo) {
   // Seteamos d, visited y creamos la cola de prioridad
   d.assign(n+1,inf);
   visited.assign(n+1,0);
@@ -19,19 +19,17 @@ void dijkstra(int nodo){
   cola.push(ii(0, nodo));
   d[nodo] = 0;
 
-  while(!cola.empty()){
+  while(!cola.empty()) {
     ii u = cola.top(); cola.pop();
     int Actual = u.second;
     visited[Actual] = 1;
-    for (int i = 0; i < adj[Actual].size(); i++){
+    for (int i = 0; i < adj[Actual].size(); i++) {
       ii Vecino = adj[Actual][i];
       int nodoVecino = Vecino.first;
       int pesoVecino = Vecino.second;
-      if (!visited[nodoVecino]){
-        if (d[Actual] + pesoVecino < d[nodoVecino]){
-          d[nodoVecino] = d[Actual] + pesoVecino;
-          cola.push(ii(d[nodoVecino],nodoVecino));
-        }
+      if (!visited[nodoVecino] && d[Actual] + pesoVecino < d[nodoVecino]) {
+        d[nodoVecino] = d[Actual] + pesoVecino;
+        cola.push(ii(d[nodoVecino],nodoVecino));
       }
     }
   }

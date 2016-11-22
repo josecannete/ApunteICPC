@@ -5,15 +5,15 @@ vector<int> visited;
 vector<vector<int> > adj;
 vector<int> topo;
 
-void Toposort(int nodo){
+void Toposort(int nodo) {
   visited[nodo] = 1;
 
-  for (int i = 0; i < adj[nodo].size(); i++){
+  for (int i = 0; i < adj[nodo].size(); i++) {
     int v = adj[nodo][i];
     if (!visited[v])
       Toposort(v);
   }
-
+  
   topo.push_back(nodo);
 }
 

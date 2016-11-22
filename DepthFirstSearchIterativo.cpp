@@ -8,13 +8,13 @@ vector<vector<int> > adj; // Lista de adyacencia
 int n; // Cantidad de nodos
 int tiempo = 0;
 
-void dfs(int nodo){
+void dfs(int nodo) {
   stack<int> pila;
   pila.push(nodo);
-  while( !pila.empty() ){
+  while(!pila.empty()) {
     int u = pila.top(); pila.pop();
     st[u] = tiempo++;
-    for (int i = 0; i < adj[u].size(); i++){
+    for (int i = 0; i < adj[u].size(); i++) {
       int vecino = adj[u][i];
       if ( st[vecino] != 0 )
         pila.push(vecino);

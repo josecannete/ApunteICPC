@@ -8,18 +8,18 @@ int n, m;
 #define MAX_N 100010
 
 void KMP_preproces() {
-  int i=0, j=-1; b[0]=-1;
+  int i = 0, j = -1; b[0] = -1;
   while(i < m) {
-    while(j >= 0 && Pat[i] != Pat[j]) j=b[j];
+    while(j >= 0 && Pat[i] != Pat[j]) j = b[j];
     i++; j++;
-    b[i]=j;
+    b[i] = j;
   }
 }
 
 bool KMP_search() {
-  int i=0, j=0;
+  int i = 0, j = 0;
   while(i < n) {
-    while(j >= 0 && Str[i] != Pat[j]) j=b[j];
+    while(j >= 0 && Str[i] != Pat[j]) j = b[j];
     i++; j++;
     if(j == m) {
       return true;

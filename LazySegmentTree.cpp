@@ -5,22 +5,22 @@ vector<int> tree, lazy, vec;
 
 void updateRangeUtil(int si, int ss, int se, int us, int ue, int diff) {
     if (lazy[si] != 0) {
-        tree[si] += (se-ss+1)*lazy[si];       // cambiar en caso distinto
+        tree[si] += (se - ss + 1) * lazy[si];       // cambiar en caso distinto
         if (ss != se) {
-            lazy[si*2 + 1]   += lazy[si];     // cambiar en caso distinto
-            lazy[si*2 + 2]   += lazy[si];     // cambiar en caso distinto
+            lazy[si*2 + 1] += lazy[si];             // cambiar en caso distinto
+            lazy[si*2 + 2] += lazy[si];             // cambiar en caso distinto
         }
         lazy[si] = 0;
     }
 
-    if (se<ss || ue<ss || se<us)
-        return ;
-    if (ss>=us && se<=ue) {
-        tree[si] += (se-ss+1)*diff;       // cambiar en caso distinto
+    if (se < ss || ue < ss || se < us)
+        return;
+    if (ss >= us && se <= ue) {
+        tree[si] += (se - ss + 1) * diff;       // cambiar en caso distinto
 
         if (ss != se) {
-            lazy[si*2 + 1]   += diff;      // cambiar en caso distinto
-            lazy[si*2 + 2]   += diff;      // cambiar en caso distinto
+            lazy[si*2 + 1] += diff;             // cambiar en caso distinto
+            lazy[si*2 + 2] += diff;             // cambiar en caso distinto
         }
         return;
     }
