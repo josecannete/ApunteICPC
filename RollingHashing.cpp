@@ -15,7 +15,7 @@ ull fast_pow(int a,int n) {
   return result;
 }
 
-void hashear(vector<ull>& h, string s) {
+void construirHash(vector<ull>& h, string s) {
   h.assign(s.size()+1,0);
   for (int i = s.size() - 1; i >= 0; i--)
     h[i] = (ull)s[i] + h[i+1] * B;
@@ -28,7 +28,7 @@ ull hashval(vector<ull>& h, int i, int j) {
 int main(){
   string s = "abaaababaaab";
   vector<ull> h;
-  hashear(h, s);
+  construirHash(h, s);
   cout << (int)'a' << endl;
   cout << fast_pow(B, 6) << endl;
   cout << hashval(h,0,5) << endl;
