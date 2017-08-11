@@ -71,5 +71,8 @@ ll query( ll cur, ll l, ll r, ll x, ll y, ll k){
 
 int main(){
   // ver problema galatic tranmission.
+  int N = 100;
+  tree.assign(6*N, vector<ll>());
+  build_tree(0, 0, N-1);
 
 }
