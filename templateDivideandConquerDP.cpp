@@ -32,4 +32,5 @@ void solve(ll k, ll l, ll r, ll optl, ll optr){
 
 
 int main(){
+  // calcular el primer nivel de la dp, luego calcular con solve desde 2 hasta k
 }
