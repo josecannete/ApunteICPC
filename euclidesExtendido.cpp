@@ -23,3 +23,12 @@ void modInverse(int a, int m) {
     cout << "El inverso modular multiplicativo es" << res << endl;
   }
 }
+
+void modDivide(int a, int b, int m){
+    a = a % m;
+    int inv = modInverse(b, m);
+    if (inv == -1)
+       cout << "Division no definida";
+    else
+       cout << "Resultado es " << (inv * a) % m;
+}
